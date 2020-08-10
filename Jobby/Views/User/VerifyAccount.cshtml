@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Account Activation";
+    string navbar = "_" + ViewBag.UserType + "Navbar";
+}
+
+@Html.Partial(navbar)
+
+<div class="container content center-vertical">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="col-lg-8 offset-lg-2 px-3 px-sm-5" id="activation-form">
+                    <div>
+                        <i class="fas fa-shield-alt fa-5x mb-1"></i>
+                        <h2 class="heavy-text text-uppercase">Account Activation</h2>
+                        <hr class="bottom-line" />
+                        <p>
+                            <strong>Welcome to Jobby, <span id="username">@HttpContext.Current.User.Identity.Name.</span></strong><br />
+                            We're so happy you've joined us. In order to activate your account, Please fill in the code sent to your email address.<br />
+                            @Ajax.ActionLink("Resend code again ?", "ResendActivationCode", "User", new AjaxOptions()
+                            {
+                                UpdateTargetId = "activation-form",
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace
+                            }
+                            , new { @class = "text-decoration-none" })
+                        </p>
+                    </div>
+                    <input type="text" class="form-control" name="code" placeholder="Enter code here.." required minlength="36" maxlength="36" />
+                    <div class="error-msg">
+                        @Html.ValidationMessage("InvalidCode")
+                        @Html.ValidationMessage("AlreadyActivated")
+                    </div>
+                    <input type="submit" value="Activate" class="btn btn-primary px-4" />
+                </div>
+            }
+        </div>
+    </div>
+</div>

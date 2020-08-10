@@ -1,0 +1,16 @@
+﻿/**** cover ****/
+#cover{
+    background: url("../images/cover-employer.jpg") no-repeat fixed;
+}
+/**** hire Section ****/
+#hire-sec{
+	margin: 40px 0;
+	padding: 16px;
+}
+#hire-text p{
+	line-height: 1.5;
+	font-size: 16px;
+}
+#hire-sec img{
+	max-width: 450px;
+}

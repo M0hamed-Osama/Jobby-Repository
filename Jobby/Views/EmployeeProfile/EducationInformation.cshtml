@@ -1,0 +1,108 @@
+﻿@model Jobby.Models.UserEducation
+@{ ViewBag.Title = "Education Information"; }
+
+@Html.Partial("_EmployeeNavbar")
+
+<div class="container content center-vertical">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="col-lg-8 offset-lg-2 px-3 px-sm-5" id="education-info-form">
+                    <div>
+                        <i class="fas fa-graduation-cap fa-5x"></i>
+                        <h2 class="mb-4 heavy-text text-uppercase">Education Information</h2>
+                    </div>
+                    <div class="d-sm-flex">
+                        <div class="col-sm-6 pl-0 pr-0 pr-sm-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" title="Start Year"><i class="far fa-calendar-check"></i></span>
+                                </div>
+                                @Html.EditorFor(model => model.StartYear, new { htmlAttributes = new { @class = "form-control", placeholder = "Start Year" } })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.StartYear)
+                            </div>
+                        </div>
+                        <div class="col-sm-6 pr-0 pl-0 pl-sm-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"  title="End Year"><i class="far fa-calendar-check"></i></span>
+                                </div>
+                                @Html.EditorFor(model => model.EndYear, new { htmlAttributes = new { @class = "form-control", placeholder = "End Year" } })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.EndYear)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" title="Degree"><i class="fas fa-graduation-cap"></i></span>
+                        </div>
+                        @Html.EditorFor(model => model.Degree, new { htmlAttributes = new { @class = "form-control", placeholder = "Degree", list = "degree" } })
+                        <datalist id="degree">
+                            <option value="Bachelor's Degree">
+                            <option value="Master's Degree">
+                            <option value="Doctorate Degree">
+                            <option value="MBA">
+                            <option value="Vocational">
+                            <option value="Technical Diploma">
+                            <option value="College Diploma">
+                        </datalist>
+                    </div>
+                    <div class="error-msg">
+                        @Html.ValidationMessageFor(model => model.Degree)
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" title="University - Institution"><i class="fas fa-university"></i></span>
+                        </div>
+                        @Html.EditorFor(model => model.Entity, new { htmlAttributes = new { @class = "form-control", placeholder = "University/Institution" } })
+
+                    </div>
+                    <div class="error-msg">
+                        @Html.ValidationMessageFor(model => model.Entity)
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" title="Field of study"><i class="fas fa-book-open"></i></span>
+                        </div>
+                        @Html.EditorFor(model => model.Field, new { htmlAttributes = new { @class = "form-control", placeholder = "Field of study" } })
+                    </div>
+                    <div class="error-msg">
+                        @Html.ValidationMessageFor(model => model.Field)
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" title="Grade"><i class="fas fa-check-square"></i></span>
+                        </div>
+                        @Html.EditorFor(model => model.Grade, new { htmlAttributes = new { @class = "form-control", placeholder = "Grade", list = "grade" } })
+                        <datalist id="grade">
+                            <option value="Excellent">
+                            <option value="Very Good">
+                            <option value="Good">
+                            <option value="Pass">
+                        </datalist>
+                    </div>
+                    <div class="error-msg">
+                        @Html.ValidationMessageFor(model => model.Grade)
+                    </div>
+                    <input type="submit" value="Save Changes" class="btn btn-primary col-12" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,170 @@
+﻿@model Jobby.Models.Job
+@{ ViewBag.Title = "Job Details"; }
+@section style
+{
+    <link rel="stylesheet" href="~/Content/job.css" />
+}
+@if (Request.IsAuthenticated)
+{
+    string navbar = "_" + ViewBag.UserType + "Navbar";
+    @Html.Partial(navbar)
+}
+else
+{
+    @Html.Partial("_EmployeeNavbar")
+}
+
+<div class="container content center-vertical">
+    <div class="row px-3">
+        <div id="job-container" class="col-lg-8 offset-lg-2">
+            @if (Request.IsAuthenticated && ViewBag.UserType=="Employee")
+            {
+                string ID = "save-icon-container-" + Model.ID.ToString().Substring(0, 8);
+                <span id="@ID">
+                    @Html.Partial("_SaveIcon", Model.ID)
+                </span>
+            }
+
+            <div class="text-center">
+                @if (Model.User.Img != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.User.Img);
+                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    <img src='@imgsrc' class="img-thumbnail rounded-circle" alt="Company Logo" title="@Model.User.Employer.CompanyName" />
+                }
+                else
+                {
+                    <img src="~/Images/company.png" class="img-thumbnail rounded-circle" alt="Company Logo" title="@Model.User.Employer.CompanyName" />
+                }
+                <h4 class="heavy-text">
+                    @Model.Title
+                    <i class="post-date d-block">
+                        posted since
+                        @{
+                            var time = DateTime.Now.Subtract(Model.PostDate);
+                            var days = time.Days;
+                            if (days < 1)
+                            {
+                                if (time.Hours > 1)
+                                {
+                                    @time.Hours <text>hours ago</text>
+                                }
+                                else if (time.Hours == 1)
+                                {
+                                    @time.Hours <text>hour ago</text>
+                                }
+                                else
+                                {
+                                    @time.Minutes
+                                    if (time.Minutes > 1)
+                                    {
+                                        <text>minutes ago</text>
+                                    }
+                                    else
+                                    {
+                                        <text>minute ago</text>
+                                    }
+                                }
+                            }
+                            else if (days < 7)
+                            {
+                                if (days > 1)
+                                {
+                                    @days
+                                    <text>days ago</text>
+                                }
+                                else
+                                {
+                                    @days <text>day ago</text>
+                                }
+                            }
+                            else if (days < 30)
+                            {
+                                int weeks = time.Days / 7;
+                                @weeks
+                                if (weeks > 1)
+                                {
+                                    <text>weeks ago</text>
+                                }
+                                else
+                                {
+                                    <text>week ago</text>
+                                }
+                            }
+                            else if (days < 365)
+                            {
+                                int months = time.Days / 30;
+                                @months
+                                if (months > 1)
+                                {
+                                    <text>months ago</text>
+                                }
+                                else
+                                {
+                                    <text>month ago</text>
+                                }
+                            }
+                            else
+                            {
+                                int years = time.Days / 365;
+                                @years
+                                if (years > 1)
+                                {
+                                    <text>years ago</text>
+                                }
+                                else
+                                {
+                                    <text>year ago</text>
+                                }
+                            }
+                        }
+                    </i>
+                </h4>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="m-0"> <span class="heavy-text">Job Field :</span> @Model.JobField.Name.</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="m-0"> <span class="heavy-text">Career Level : </span> @Model.CareerLevel.</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="m-0"> <span class="heavy-text">Location : </span> @Model.Country.Name, @Model.City.</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="m-0"> <span class="heavy-text">Salary : </span> @Model.Salary EGP.</p>
+                </div>
+            </div>
+            @{
+                string[] lines = Model.JobDesc.Split('\n');
+            }
+            <div class="m-0">
+                <p class="m-0"><span class="heavy-text">About The Job : </span></p>
+                <ul id="description">
+                    @for (int i = 0; i < lines.Length; i++)
+                    {
+                        <li>@lines[i]</li>
+                    }
+                </ul>
+            </div>
+            <div class="w-100 text-center">
+                @if (Request.IsAuthenticated && ViewBag.UserType=="Employee")
+                {
+                    if (ViewBag.isApplied != null && ViewBag.isApplied)
+                    {
+                        <button id="apply" class="btn btn-sm btn-outline-success px-5" title="Applied" disabled>Applied</button>
+                    }
+                    else
+                    {
+                        <a id="apply" class="btn btn-sm btn-primary px-5" href=@Url.Action("ApplyForJob", "Job", new { id = Model.ID }) title="Apply">Apply Now</a>
+                    }
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/job.js"></script>
+}

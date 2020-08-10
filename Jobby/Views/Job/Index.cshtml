@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Jobby.Models.Job>
+@using Jobby.Models.Extended
+@{ ViewBag.Title = "Explore Jobs"; }
+@section style
+{
+    <link rel="stylesheet" href="~/Content/jobs.css" />
+    <link rel="stylesheet" href="~/Content/explore.css" />
+}
+
+@if (Request.IsAuthenticated)
+{
+    string navbar = "_" + ViewBag.UserType + "Navbar";
+    @Html.Partial(navbar)
+}
+else
+{
+    @Html.Partial("_EmployeeNavbar")
+}
+<div class="container content">
+    <div class="row">
+        <div id="search-options" class="col-md-4 col-xl-3 pb-0">
+            <div>
+                <div class="w-100 px-1 mt-md-2">
+                    <span class="heavy-text">Filter Search Result</span><a href="#filters" data-toggle="collapse"><i class="fas fa-chevron-down expand mt-2 text-dark d-md-none"></i></a>
+                </div>
+                <hr />
+                @Html.Partial("_Filters", new FilterViewModel())
+            </div>
+        </div>
+        <div id="search-result" class="col-md-8 col-xl-9">
+            <div class="mb-3">
+                @using (Ajax.BeginForm("Search", "Job", new AjaxOptions()
+                {
+                    HttpMethod = "POST",
+                    UpdateTargetId = "jobs-container",
+                    InsertionMode = InsertionMode.Replace
+                }))
+                {
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search Jobs .. " name="search" id="search" required>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div id="jobs-container">
+                @Html.Partial("_Jobs")
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/job.js"></script>
+    <script src="~/Scripts/filter.js"></script>
+}

@@ -1,0 +1,20 @@
+﻿#cover{
+	background: url("../images/cover-employee.jpg") no-repeat fixed;
+}
+
+/**** latest jobs Section *****/
+#latest-jobs-sec{
+	margin: 40px 0;
+}
+.job{
+	padding: 12px;
+	transition: all .5s;
+	min-height: 100%;
+}
+.job:hover{
+  border: 1px solid rgb(200, 200, 200);
+}
+.job .job-link,.job .job-link:hover{
+	color: #202b46;
+}
+

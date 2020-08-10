@@ -1,0 +1,19 @@
+﻿/**** navbar active link ****/
+#saved {
+    background-Color: #007aff;
+}
+#saved a text{
+	color: white;
+}
+@media screen and (max-width: 768px) {
+	#saved{
+		background-Color : rgba(0,0,0,0);
+	}
+	#saved a text{
+		color: #007aff;
+	}
+}
+/****************************/
+#not-found{
+	margin: 35vh 0;
+}

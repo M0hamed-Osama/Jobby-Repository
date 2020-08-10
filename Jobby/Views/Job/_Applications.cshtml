@@ -1,0 +1,158 @@
+﻿@model IEnumerable<Jobby.Models.Application>
+
+@if (Model.Count() > 0)
+{
+    <div class="w-100 mt-2 p-1">
+        <i class="fas fa-briefcase fa-5x"></i>
+        <h3 class="m-0">@HttpContext.Current.User.Identity.Name's Applications.</h3>
+        <p class="mb-1">Find out your job applications down here, Please check application's status to know if your application is accepted, shortlisted, pending or rejected.</p>
+    </div>
+    foreach (var application in Model)
+    {
+        <div id="job-status">
+            <p> <span class="@application.ApplicationStatus"> <text class="heavy-text">Status : </text> @application.ApplicationStatus </span> </p>
+        </div>
+        <div class="media mt-n3">
+            @if (application.Job.User.Img != null)
+            {
+                var base64 = Convert.ToBase64String(application.Job.User.Img);
+                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                <img src='@imgsrc' class="img-thumbnail" alt="Company Logo" title="@application.Job.User.Employer.CompanyName"/>
+            }
+            else
+            {
+                <img src="~/Images/company.png" class="img-thumbnail" alt="Company Logo" title="@application.Job.User.Employer.CompanyName"/>
+            }
+            <div class="media-body">
+                <div class="d-flex p-0 m-0">
+                    <h5>
+                        <a href=@Url.Action("Job","Job",new {id=application.Job.ID}) class="job-link heavy-text">@application.Job.Title</a>
+                        <i class="post-date d-block">
+                            posted since
+                            @{
+                                var time = DateTime.Now.Subtract(application.Job.PostDate);
+                                var days = time.Days;
+                                if (days < 1)
+                                {
+                                    if (time.Hours > 1)
+                                    {
+                                        @time.Hours <text>hours ago</text>
+                                    }
+                                    else if (time.Hours == 1)
+                                    {
+                                        @time.Hours <text>hour ago</text>
+                                    }
+                                    else
+                                    {
+                                        @time.Minutes
+                                        if (time.Minutes > 1)
+                                        {
+                                            <text>minutes ago</text>
+                                        }
+                                        else
+                                        {
+                                            <text>minute ago</text>
+                                        }
+                                    }
+                                    <span class="badge badge-success pb-1">New</span>
+                                }
+                                else if (days < 7)
+                                {
+                                    if (days > 1)
+                                    {
+                                        @days
+                                        <text>days ago</text>
+                                    }
+                                    else
+                                    {
+                                        @days <text>day ago</text>
+                                        <span class="badge badge-primary pb-1">New</span>
+                                    }
+                                }
+                                else if (days < 30)
+                                {
+                                    int weeks = time.Days / 7;
+                                    @weeks
+                                    if (weeks > 1)
+                                    {
+                                        <text>weeks ago</text>
+                                    }
+                                    else
+                                    {
+                                        <text>week ago</text>
+                                    }
+                                }
+                                else if (days < 365)
+                                {
+                                    int months = time.Days / 30;
+                                    @months
+                                    if (months > 1)
+                                    {
+                                        <text>months ago</text>
+                                    }
+                                    else
+                                    {
+                                        <text>month ago</text>
+                                    }
+                                }
+                                else
+                                {
+                                    int years = time.Days / 365;
+                                    @years
+                                    if (years > 1)
+                                    {
+                                        <text>years ago</text>
+                                    }
+                                    else
+                                    {
+                                        <text>year ago</text>
+                                    }
+                                }
+                            }
+                        </i>
+                    </h5>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="m-0"> <span class="heavy-text">Job Field : </span> @application.Job.JobField.Name.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="m-0"> <span class="heavy-text">Career Level : </span> @application.Job.CareerLevel.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="m-0"> <span class="heavy-text">Location : </span> @application.Job.Country.Name, @application.Job.City.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="m-0"> <span class="heavy-text">Salary : </span> @application.Job.Salary EGP.</p>
+                    </div>
+                </div>
+                @{
+                    string[] lines = application.Job.JobDesc.Split('\n');
+                    string identifier = "details-" + application.JobID.ToString().Substring(0, 8);
+                }
+                <div id="@identifier" class="collapse">
+                    <p class="m-0"><span class="heavy-text">About The Job : </span></p>
+                    <ul id="description">
+                        @for (int i = 0; i < lines.Length; i++)
+                        {
+                            <li>@lines[i]</li>
+                        }
+                    </ul>
+                </div>
+                <div class="text-right mt-1">
+                    <a id="details" href="#@identifier" data-toggle="collapse" class="btn btn-sm btn-outline-primary" title="Show Details" onclick="Details(this)"><i class="fas fa-eye"></i></a>
+                    <a id="delete" class="btn btn-sm btn-outline-danger" href=@Url.Action("DeleteApplication","Job",new {id=application.JobID}) title="Delete"
+                       data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#application-container"> <i class="fas fa-times"></i></a>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div id="not-found">
+        <i class="fas fa-exclamation-circle fa-5x"></i>
+        <h3>Your Application List is Empty.</h3>
+    </div>
+}

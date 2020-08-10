@@ -1,0 +1,24 @@
+﻿#profile a text {
+	color: #007aff !important;
+}
+
+#upload-img{
+	position: relative;
+	top:-80px;
+}
+#upload-img img{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+#upload-img i{
+	display: none;
+	color:  rgb(200,200,200);
+  position: absolute;
+	top: -3px;
+	left:34px;
+	margin-bottom: -32px;
+}
+#upload-img:hover i{
+	display: block;
+}

@@ -1,0 +1,29 @@
+﻿#upload-img {
+	top: 0;
+}
+#personal, #education, #skill, #work, #security{
+	border: 1px solid rgb(235, 235, 235);
+	border-radius: 4px;
+	padding: 20px;
+	height: 100%;
+	transition: all .5s;
+}
+#personal:hover, #education:hover, #skill:hover, #work:hover, #security:hover{
+  border: 1px solid rgb(180, 180, 180);
+}
+.content p, #personal p, #education p, #skill p, #work p, #security p{
+	margin-bottom: 4px;
+	color:rgba(28,37,64,.8);
+}
+h3{ 
+	margin: 0; 
+}
+i{ 
+	margin-bottom: 4px; 
+}
+#personal i { color:rgba(0, 51, 153,.8) }
+#education i { color:rgba(255, 153, 51,.8) }
+#skill i { color:rgba(0, 204, 102,.8) }
+#work i { color:rgba(255, 204, 0,.8) }
+#security i { color:rgba(51, 153, 255,.8) }
+

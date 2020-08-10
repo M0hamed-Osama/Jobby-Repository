@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Jobby.Models.UserSkill>
+@{
+    string[] colors = new string[5] {"rgb(255, 102, 102)","rgb(255, 102, 102)","rgb(247, 255, 102)",
+                                                  "rgb(128, 181, 255)","rgb(140, 242, 147)" };
+}
+<div class="col-lg-8 offset-lg-2">
+    <div id="skills">
+        @if (Model.Where(s => s.IsLanguage == false).Count() < 1)
+        {
+            <div class="w-100 no-info">
+                <i class="fas fa-sliders-h fa-5x"></i>
+                <h4 class="heavy-text">Skills Will Appear Here</h4>
+            </div>
+        }
+        else
+        {
+            <h2 class="heavy-text">Skills</h2>
+            <hr class="bottom-line mt-n2" />
+            foreach (var skill in Model.Where(s => s.IsLanguage == false))
+            {
+                string level = (skill.SkillLevel * 20) + "%";
+                <div class="d-flex">
+                    <div class="progress w-100 my-1" style="height:24px;">
+                        <div class="progress-bar text-dark" style="width:@level; height:24px; background-color:@colors[skill.SkillLevel-1]">@skill.SkillName</div>
+                    </div>
+                    <a class="mx-2 text-dark manage" title="Edit" href=@Url.Action("EditUserSkill","EmployeeProfile",new {id=skill.ID})><i class="fas fa-edit"></i></a>
+                    <a class="text-danger manage" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#user-skills-container" title="Remove" href=@Url.Action("DeleteUserSkill","EmployeeProfile",new {id=skill.ID})><i class="fas fa-window-close"></i></a>
+                </div>
+            }
+        }
+        <a class="btn btn-primary add-btn" href=@Url.Action("AddUserSkill","EmployeeProfile")>Add New</a>
+    </div>
+</div>
+<div class="col-lg-8 offset-lg-2">
+    <div id="languages">
+        @if (Model.Where(s => s.IsLanguage == true).Count() < 1)
+        {
+            <div class="w-100 no-info">
+                <i class="fas fa-language fa-5x"></i>
+                <h4 class="heavy-text">Languages Will Appear Here</h4>
+            </div>
+        }
+        else
+        {
+            <h2 class="heavy-text">Languages</h2>
+            <hr class="bottom-line mt-n1" />
+            foreach (var skill in Model.Where(s => s.IsLanguage == true))
+            {
+                string level = (skill.SkillLevel * 20) + "%";
+                <div class="d-flex">
+                    <div class="progress w-100 my-1" style="height:24px;">
+                        <div class="progress-bar text-dark" style="width:@level; height:24px; background-color:@colors[skill.SkillLevel-1]">@skill.SkillName</div>
+                    </div>
+                    <a class="mx-2 text-dark manage" title="Edit" href=@Url.Action("EditUserSkill","EmployeeProfile",new {id=skill.ID})><i class="fas fa-edit"></i></a>
+                    <a class="text-danger manage" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#user-skills-container" title="Remove" href=@Url.Action("DeleteUserSkill","EmployeeProfile",new {id=skill.ID})><i class="fas fa-window-close"></i></a>
+                </div>
+            }
+        }
+        <a class="btn btn-primary add-btn" href=@Url.Action("AddUserSkill","EmployeeProfile")>Add New</a>
+    </div>
+</div>

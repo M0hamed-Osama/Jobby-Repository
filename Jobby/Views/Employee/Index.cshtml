@@ -1,0 +1,49 @@
+﻿@{ ViewBag.Title = "Home"; }
+@section style
+{
+    <link rel="stylesheet" href="~/Content/home-employee.css" />
+    <link rel="stylesheet" href="~/Content/home.css" />
+}
+
+@Html.Partial("_EmployeeNavbar")
+<!-- cover Section -->
+<div id="cover">
+    <div id="overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1 content center-vertical">
+                    <div id="intro-txt">
+                        <h1>Jobs are Waiting</h1>
+                        <p>“Choose a job you love, and you will never have to work a day in your life.”</p>
+                        @using (Html.BeginForm("Index", "Job"))
+                        {
+                            <div class="input-group input-group-lg d-flex flex-row justify-content-center">
+                                <input type="text" class="form-control" placeholder="Search Jobs .. " name="search" id="search">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- latest jobs section-->
+<section id="latest-jobs-sec" class="w-100">
+    @Html.Action("LatestJobs")
+</section>
+
+<!-- companies section-->
+<section id="companies-sec" class="w-100">
+    @Html.Action("TopCompanies", "Employer")
+</section>
+
+<!-- services section-->
+<section id="services-sec" class="w-100">
+    @Html.Action("Services")
+</section>
+@section scripts{
+    <script src="~/Scripts/home.js"></script>
+}

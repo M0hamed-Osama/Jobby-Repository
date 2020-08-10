@@ -1,0 +1,59 @@
+﻿<div id="mynav" class="navbar navbar-expand-md navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand heavy-text" href=@Url.Action("Index","Employer")> <b>JOB<span>BY</span></b></a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse">
+
+            @if (Request.IsAuthenticated)
+            {
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item" id="explore"> <a class="nav-link" href=@Url.Action("Index","Job")><text>Explore</text></a></li>
+                    <li class="nav-item" id="postedJobs"><a class="nav-link" href=@Url.Action("PostedJobs","Job")><text>Posted Jobs</text></a></li>
+                </ul>
+                <ul class="nav navbar-nav d-none d-md-inline-flex">
+                    <li class="nav-item" id="profile" style="overflow:hidden">
+                        <a class="nav-link icon-link" href=@Url.Action("Profile","Employer") title="Profile">
+                            <text><i class="fas  fa-user-circle pt-1" style="font-size:30px"></i></text>
+                        </a>
+                    </li>
+                    <li class="nav-item " style="overflow:hidden">
+                        @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                         {
+                            <a class="nav-link icon-link" href="javascript:document.getElementById('logoutForm').submit()" title="Sign out">
+                                <text><i class="fas fa-sign-out-alt pt-1" style="font-size:30px"></i></text>
+                            </a>
+                         }
+                    </li>
+                </ul>
+                //display text in small devices insted of icons
+                <ul class="nav navbar-nav d-md-none">
+                    <li class="nav-item" id="profile">
+                        <a class="nav-link" href=@Url.Action("Profile","Employer")>
+                            <text>Profile</text>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                         {
+                            <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">
+                                <text>Sign out</text>
+                            </a>
+                         }
+                    </li>
+                </ul>
+            }
+            else
+            {
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" id="explore"> <a class="nav-link" href=@Url.Action("Index","Job")><text>Explore</text></a></li>
+                    <li class="nav-item" id="login">   <a class="nav-link" href=@Url.Action("Login","User")><text>Sign in</text></a></li>
+                    <li class="nav-item" id="register"><a class="nav-link" href=@Url.Action("Register","Employer")><text>Register</text></a></li>
+                    <li class="nav-item" id="employ">  <a class="nav-link employer-btn btn btn-outline-primary" href=@Url.Action("Index","Employee")><text>Employee?</text></a></li>
+                </ul>
+            }
+
+        </div>
+    </div>
+</div>

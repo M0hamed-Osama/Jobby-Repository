@@ -1,0 +1,116 @@
+﻿@model Jobby.Models.Job
+@{ ViewBag.Title = "Edit Job"; }
+
+@Html.Partial("_EmployerNavbar")
+
+<div class="container content">
+    <div class="row">
+        <div class="p-3 m-3 w-100" id="job-info-form">
+            <div class="w-100 mb-3">
+                <h2 class="heavy-text text-uppercase">Edit Job Information</h2>
+                <hr class="bottom-line" />
+            </div>
+            <div class="col-lg-10 offset-lg-1">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.ID)
+                    @Html.HiddenFor(model => model.UserID)
+                    @Html.HiddenFor(model => model.PostDate)
+                    @Html.HiddenFor(model => model.JobStatus)
+                    <div class="d-sm-flex">
+                        <div class="col-sm-6 px-0 pr-sm-2">
+
+                            <div class="input-group">
+                                <div class="input-group-prepend" title="Job Title">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                </div>
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Job Title" } })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.Title)
+                            </div>
+                        </div>
+                        <div class="col-sm-6 px-0 pl-sm-2">
+
+                            <div class="input-group">
+                                <div class="input-group-prepend" title="Job Field">
+                                    <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                                </div>
+                                @Html.DropDownList("JobFieldID", null, "Job Field", htmlAttributes: new { @class = "custom-select" })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.JobFieldID)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex">
+                        <div class="col-sm-6 px-0 pr-sm-2">
+
+                            <div class="input-group">
+                                <div class="input-group-prepend" title="Career Level">
+                                    <span class="input-group-text"><i class="fas fa-layer-group"></i></span>
+                                </div>
+                                @Html.DropDownList("CareerLevel",
+                                new SelectList(new List<string>() { "Volunteer", "Internship", "Student", "Entry Level", "Experienced", "Manager", "Senior Management" }), "Career Level", new { @class = "custom-select" })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.CareerLevel)
+                            </div>
+                        </div>
+                        <div class="col-sm-6 px-0 pl-sm-2">
+
+                            <div class="input-group">
+                                <div class="input-group-prepend" title="Job Salary">
+                                    <span class="input-group-text"><i class="fas fa-coins"></i></span>
+                                </div>
+                                @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control", placeholder = "Salary", min = "500", step = "50" } })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.Salary)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-sm-flex">
+                        <div class="col-sm-6 px-0 pr-sm-2">
+
+                            <div class="input-group">
+                                <div class="input-group-prepend" title="Job Country">
+                                    <span class="input-group-text"><i class="fas fa-flag"></i></span>
+                                </div>
+                                @Html.DropDownList("CountryID", null, "Country", htmlAttributes: new { @class = "custom-select" })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.CountryID)
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 px-0 pl-sm-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend" title="Job City">
+                                    <span class="input-group-text"><i class="fas fa-city"></i></span>
+                                </div>
+                                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", placeholder = "City" } })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.City)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group text-left m-0 mt-n1">
+                        <label><strong>Description :</strong></label>
+                        @Html.TextAreaFor(model => model.JobDesc, new { @class = "form-control", rows = "8", placeholder = "About the job..", style = "resize:none;white-space: pre-wrap" })
+                        <div class="error-msg">
+                            @Html.ValidationMessageFor(model => model.JobDesc)
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Save Changes" class="btn btn-primary col-md-2 col-sm-3" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jqueryval")
+

@@ -1,0 +1,91 @@
+﻿@model Jobby.Models.Extended.FilterViewModel
+
+<div id="filters" class="collapse show d-md-block mb-md-3">
+    @using (Ajax.BeginForm("Filter", "Job", null, new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "jobs-container"
+    }, new { id = "filter-form" }))
+    {
+        <a href="#career-levels" data-toggle="collapse" onclick="Expand(this)">Career Levels <i class="fas fa-plus expand"></i></a>
+        <ul id="career-levels" class="collapse filter-list">
+            @for (int i = 0; i < Model.CareerLevelFilters.Count; i++)
+            {
+                string ID = Model.CareerLevelFilters[i].Value.Replace(" ", "");
+                <li>
+                    @Html.HiddenFor(model => model.CareerLevelFilters[i].Value)
+                    <div class="custom-control custom-checkbox">
+                        @Html.EditorFor(model => model.CareerLevelFilters[i].IsChecked, new { htmlAttributes = new {@class = "custom-control-input",id=ID}})
+                        <label class="custom-control-label" for="@ID">@Model.CareerLevelFilters[i].Value</label>
+                    </div>
+                </li>
+            }
+        </ul>
+
+        <a href="#post-date" data-toggle="collapse" onclick="Expand(this)">Post Date <i class="fas fa-plus expand"></i></a>
+        <ul id="post-date" class="collapse filter-list">
+            <li>
+                @Html.HiddenFor(model => model.PostDateFilters[0].Value)
+                <div class="custom-control custom-checkbox">
+                    @Html.EditorFor(model => model.PostDateFilters[0].IsChecked, new { htmlAttributes = new { @class = "custom-control-input", id = Model.PostDateFilters[0].Value } })
+                    <label class="custom-control-label" for="@Model.PostDateFilters[0].Value">Past 24 Hours</label>
+                </div>
+            </li>
+            <li>
+                @Html.HiddenFor(model => model.PostDateFilters[1].Value)
+                <div class="custom-control custom-checkbox">
+                    @Html.EditorFor(model => model.PostDateFilters[1].IsChecked, new { htmlAttributes = new { @class = "custom-control-input", id = Model.PostDateFilters[1].Value } })
+                    <label class="custom-control-label" for="@Model.PostDateFilters[1].Value">Past Week</label>
+                </div>
+            </li>
+            <li>
+                @Html.HiddenFor(model => model.PostDateFilters[2].Value)
+                <div class="custom-control custom-checkbox">
+                    @Html.EditorFor(model => model.PostDateFilters[2].IsChecked, new { htmlAttributes = new { @class = "custom-control-input", id = Model.PostDateFilters[2].Value } })
+                    <label class="custom-control-label" for="@Model.PostDateFilters[2].Value">Past Month</label>
+                </div>
+            </li>
+        </ul>
+
+        <a href="#country" data-toggle="collapse" onclick="Expand(this)">Country <i class="fas fa-plus expand"></i></a>
+        <ul id="country" class="collapse filter-list">
+            @for (int i = 0; i < Model.CountryFilters.Count; i++)
+            {
+                string ID = Model.CountryFilters[i].Value.Replace(" ", "");
+                <li>
+                    @Html.HiddenFor(model => model.CountryFilters[i].Value)
+                    <div class="custom-control custom-checkbox">
+                        @Html.EditorFor(model => model.CountryFilters[i].IsChecked, new { htmlAttributes = new { @class = "custom-control-input", id = ID } })
+                        <label class="custom-control-label" for="@ID">@Model.CountryFilters[i].Value</label>
+                    </div>
+                </li>
+            }
+        </ul>
+
+        <a href="#salary" data-toggle="collapse" onclick="Expand(this)">Salary <i class="fas fa-plus expand"></i></a>
+        <ul id="salary" class="collapse filter-list">
+            <li>
+                @Html.HiddenFor(model => model.SalaryFilters[0].Value)
+                <div class="custom-control custom-checkbox">
+                    @Html.EditorFor(model => model.SalaryFilters[0].IsChecked, new { htmlAttributes = new { @class = "custom-control-input", id = "s-" + Model.SalaryFilters[0].Value } })
+                    <label class="custom-control-label" for="s-@Model.SalaryFilters[0].Value">More Than 3000 EGP</label>
+                </div>
+            </li>
+            <li>
+                @Html.HiddenFor(model => model.SalaryFilters[1].Value)
+                <div class="custom-control custom-checkbox">
+                    @Html.EditorFor(model => model.SalaryFilters[1].IsChecked, new { htmlAttributes = new { @class = "custom-control-input", id = "s-" + Model.SalaryFilters[1].Value } })
+                    <label class="custom-control-label" for="s-@Model.SalaryFilters[1].Value">More Than 6000 EGP</label>
+                </div>
+            </li>
+            <li>
+                @Html.HiddenFor(model => model.SalaryFilters[2].Value)
+                <div class="custom-control custom-checkbox">
+                    @Html.EditorFor(model => model.SalaryFilters[2].IsChecked, new { htmlAttributes = new { @class = "custom-control-input", id = "s-" + Model.SalaryFilters[2].Value } })
+                    <label class="custom-control-label" for="s-@Model.SalaryFilters[2].Value">More Than 9000 EGP</label>
+                </div>
+            </li>
+        </ul>
+    }
+</div>

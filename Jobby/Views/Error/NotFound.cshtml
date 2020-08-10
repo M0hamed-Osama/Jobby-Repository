@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Error";
+}
+@if (Request.IsAuthenticated)
+{
+    string navbar = "_" + ViewBag.UserType + "Navbar";
+    @Html.Partial(navbar)
+}
+else
+{
+    @Html.Partial("_EmployeeNavbar")
+}
+<div class="container content center-vertical">
+    <div class="row">
+        <div class="col-md-10 offset-md-1 text-danger" style="opacity:.3;">
+            <i class="fas fa-exclamation-triangle fa-7x mb-2"></i>
+            <h2>Page Not Found</h2>
+            <h3>We're sorry, we couldn't find the page you requested.</h3>
+        </div>
+    </div>
+</div>

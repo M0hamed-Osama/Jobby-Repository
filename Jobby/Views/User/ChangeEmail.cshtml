@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Change Email Address";
+    string navbar = "_" + ViewBag.UserType + "Navbar";
+}
+
+@Html.Partial(navbar)
+
+<div class="container content center-vertical">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="col-lg-8 offset-lg-2  px-3 px-sm-5" id="change-email-form">
+                    <div>
+                        <i class="fas fa-shield-alt fa-5x mb-1"></i>
+                        <h2 class="heavy-text text-uppercase">Change Email Address</h2>
+                        <hr class="bottom-line" />
+                        <p>Please fill in your <strong>New Email Address</strong> below to replace current one. Note that you will need to activate your account after changing your email.</p>
+                    </div>
+                    <input type="email" class="form-control" name="userEmail" placeholder="Enter New email here.." required maxlength="320"/>
+                    <div class="error-msg">
+                        @Html.ValidationMessage("InvalidEmail")
+                    </div>
+                    <input type="submit" value="Save Changes" class="btn btn-primary col-sm-3" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

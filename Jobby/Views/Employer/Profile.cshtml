@@ -1,0 +1,119 @@
+﻿@model Jobby.Models.Extended.EmployerProfileViewModel
+@{ ViewBag.Title = "Profile"; }
+
+@section style
+{
+    <link rel="stylesheet" href="~/Content/profile.css" />
+}
+
+@Html.Partial("_EmployerNavbar")
+
+<div class="container content center-vertical">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="col-lg-8 offset-lg-2 px-3 px-sm-5 " style="margin-top:70px" id="account-info-form">
+                <div id="img-container">
+                    @using (Html.BeginForm("ChangeImg", "User", FormMethod.Post, new { enctype = "multipart/form-data", id = "img-form", @class = "w-100" }))
+                    {
+                        <div class="w-100">
+                            <input type="file" id="upload" name="upload" class="d-none" accept=".png, .jpg, .jpeg" />
+                            @if (Model.Img != null)
+                            {
+                                var base64 = Convert.ToBase64String(Model.Img);
+                                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                <a id="upload-img" title="Change Logo" href=@Url.Action("ChangeImg","User")>
+                                    <img src='@imgsrc' class="img-thumbnail" alt="profile picture" />
+                                    <i class="fas fa-camera fa-2x"></i>
+                                </a>
+                            }
+                            else
+                            {
+                                <a id="upload-img" title="Change Company Logo" href=@Url.Action("ChangeImg","User")>
+                                    <img src="~/Images/company.png" class="img-thumbnail" alt="profile picture" />
+                                    <i class="fas fa-camera fa-2x"></i>
+                                </a>
+                            }
+                        </div>
+                    }
+                </div>
+                <h2 style="margin:-75px 0 16px" class="heavy-text text-uppercase">Account Information</h2>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="d-sm-flex">
+                        <div class="col-sm-6 pl-0 pr-0 pr-sm-2">
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                </div>
+                                @Html.EditorFor(model => model.FName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.FName)
+                            </div>
+                        </div>
+                        <div class="col-sm-6 pr-0 pl-0 pl-sm-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                </div>
+                                @Html.EditorFor(model => model.LName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.LName)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-sm-flex">
+                        <div class="col-sm-6 pl-0 pr-0 pr-sm-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-building"></i></span>
+                                </div>
+                                @Html.EditorFor(model => model.CName, new { htmlAttributes = new { @class = "form-control", placeholder = "Company Name" } })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.CName)
+                            </div>
+                        </div>
+                        <div class="col-sm-6 pr-0 pl-0 pl-sm-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                                </div>
+                                @Html.EditorFor(model => model.Industry, new { htmlAttributes = new { @class = "form-control", placeholder = "Industry" } })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.Industry)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                        </div>
+                        @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control", placeholder = "Company Website (if exists)" } })
+                    </div>
+                    <div class="error-msg">
+                        @Html.ValidationMessageFor(model => model.Website)
+                        @Html.ValidationMessage("SaveFaild")
+                    </div>
+
+                    <input type="submit" value="Save Changes" class="btn btn-primary col-12 mb-2" />
+                    <p class="mb-0">
+                        <strong>Manage Security Information?</strong> Please click the following link to
+                        <a class="text-decoration-none" href='@Url.Action("ChangePassword", "User")'>Change Security Information</a>.
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/profile.js"></script>
+}

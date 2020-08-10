@@ -1,0 +1,17 @@
+﻿@model Guid
+
+@{ string ID = "#save-icon-container-"+Model.ToString().Substring(0, 8); }
+@if (ViewBag.isSaved !=null && ViewBag.isSaved)
+ {
+    <a href=@Url.Action("UnSaveJob", "Job", new { id = Model }) title="Unsave Job" 
+        data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="@ID">
+        <i class="fas fa-bookmark fa-2x"></i>
+    </a>
+ }
+ else
+ {
+    <a href=@Url.Action("SaveJob", "Job", new { id = Model }) title="Save Job" 
+        data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="@ID">
+        <i class="far fa-bookmark fa-2x"></i>
+    </a>
+ }

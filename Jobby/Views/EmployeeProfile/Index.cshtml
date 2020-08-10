@@ -1,0 +1,89 @@
+﻿@model Jobby.Models.User
+@{ ViewBag.Title = "Profile"; }
+
+@section style
+{
+    <link rel="stylesheet" href="~/Content/profile.css" />
+    <link rel="stylesheet" href="~/Content/employee-profile.css" />
+}
+
+@Html.Partial("_EmployeeNavbar")
+
+<div class="container content">
+    <div class="row py-4">
+        @using (Html.BeginForm("ChangeImg", "User", FormMethod.Post, new { enctype = "multipart/form-data", id = "img-form", @class = "w-100" }))
+        {
+            <div class="w-100 px-2">
+                <input type="file" id="upload" name="upload" class="d-none" accept=".png, .jpg, .jpeg" />
+                @if (Model.Img != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.Img);
+                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    <a id="upload-img" title="Change Profile Picture" href=@Url.Action("ChangeImg","User")>
+                        <img src='@imgsrc' class="img-thumbnail" alt="profile picture" />
+                        <i class="fas fa-camera fa-2x"></i>
+                    </a>
+                }
+                else
+                {
+                    <a id="upload-img" title="Change Profile Picture" href=@Url.Action("ChangeImg","User")>
+                        <img src="~/Images/user.png" class="img-thumbnail" alt="profile picture" />
+                        <i class="fas fa-camera fa-2x"></i>
+                    </a>
+                }
+            </div>
+        }
+        <div class="w-100 px-2">
+            <h3>Welcome, @Model.FName @Model.LName</h3>
+            <p class="mb-3">Manage your personal, education, skills, work and security information to improve your jobby profile.</p>
+        </div>
+        <div class="container col-md-10">
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div id="personal">
+                        <i class="fas fa-address-card fa-4x"></i>
+                        <h3>Personal Information</h3>
+                        <p>Change your name, age, mobile number, etc.</p>
+                        <a href=@Url.Action("PersonalInformation","EmployeeProfile") class="text-decoration-none">Manage</a>
+                    </div>
+
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div id="education">
+                        <i class="fas fa-graduation-cap fa-4x"></i>
+                        <h3>Education Information</h3>
+                        <p>Change field(s) of study, certificates, etc.</p>
+                        <a href=@Url.Action("EducationInformation","EmployeeProfile") class="text-decoration-none">Manage</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div id="skill">
+                        <i class="fab fa-stripe-s fa-4x"></i>
+                        <h3>Skills Information</h3>
+                        <p>Update your languages, personal and technical skills.</p>
+                        <a href=@Url.Action("SkillsInformation","EmployeeProfile") class="text-decoration-none">Manage</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div id="work">
+                        <i class="fas fa-briefcase fa-4x"></i>
+                        <h3>Work Information</h3>
+                        <p>Updating may increase your chance of obtaining the appropriate job.</p>
+                        <a href=@Url.Action("WorkInformation","EmployeeProfile") class="text-decoration-none">Manage</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div id="security">
+                        <i class="fas fa-shield-alt fa-4x"></i>
+                        <h3>Security Information</h3>
+                        <p>Security information helps you protecting your account.</p>
+                        <a href=@Url.Action("ChangePassword","User") class="text-decoration-none">Manage</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/profile.js"></script>
+}

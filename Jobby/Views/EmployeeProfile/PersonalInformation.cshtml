@@ -1,0 +1,118 @@
+﻿@model Jobby.Models.Extended.PersonalInfoViewModel
+@{ ViewBag.Title = "Personal Information"; }
+
+@Html.Partial("_EmployeeNavbar")
+
+<div class="container content center-vertical">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="col-lg-8 offset-lg-2 px-3 px-sm-5" id="personal-info-form">
+                    <div>
+                        <i class="far fa-address-card fa-5x"></i>
+                        <h2 class="mb-3 heavy-text text-uppercase">Personal Information</h2>
+                    </div>
+                    <div class="d-sm-flex">
+                        <div class="col-sm-6 pl-0 pr-0 pr-sm-2">
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" title="First Name"><i class="fas fa-user"></i></span>
+                                </div>
+                                @Html.EditorFor(model => model.FName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.FName)
+                            </div>
+                        </div>
+                        <div class="col-sm-6 pr-0 pl-0 pl-sm-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" title="Last Name"><i class="fas fa-user"></i></span>
+                                </div>
+                                @Html.EditorFor(model => model.LName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.LName)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex">
+                        <div class="col-sm-6 pl-0 pr-0 pr-sm-2">
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" title="Country"><i class="fas fa-flag"></i></span>
+                                </div>
+                                @Html.DropDownList("CountryID", null, "Country", htmlAttributes: new { @class = "custom-select" })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.CountryID)
+                            </div>
+                        </div>
+                        <div class="col-sm-6 pr-0 pl-0 pl-sm-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" title="City"><i class="fas fa-city"></i></span>
+                                </div>
+                                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", placeholder = "City" } })
+                            </div>
+                            <div class="error-msg">
+                                @Html.ValidationMessageFor(model => model.City)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"  title="Phone Number"><i class="fas fa-mobile-alt"></i></span>
+                        </div>
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Phone Number" } })
+                    </div>
+                    <div class="error-msg">
+                        @Html.ValidationMessageFor(model => model.PhoneNumber)
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"  title="Birthday"><i class="fas fa-birthday-cake"></i></span>
+                        </div>
+                        @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @Value = String.Format("{0:yyyy-MM-dd}", Model.BirthDate), @class = "form-control" } })
+                    </div>
+                    <div class="error-msg">
+                        @Html.ValidationMessageFor(model => model.BirthDate)
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" title="Martial Status"><i class="fas fa-address-card"></i></span>
+                        </div>
+
+                        @Html.DropDownList("MartialStatus", new SelectList(new List<string>() { "Single", "Married" }), "Martial Status", new { @class = "custom-select" })
+                    </div>
+                    <div class="error-msg">
+                        @Html.ValidationMessageFor(model => model.MartialStatus)
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" title="Military Status"><i class="fas fa-address-card"></i></span>
+                        </div>
+                        @Html.DropDownList("MilitaryStatus", new SelectList(new List<string>() { "Exempted", "Postponed", "Completed", "Not Applicable", "Currently serving" }), "Military Status", new { @class = "custom-select" })
+                    </div>
+                    <div class="error-msg">
+                        @Html.ValidationMessageFor(model => model.MilitaryStatus)
+                        @Html.ValidationMessage("SaveFaild")
+                    </div>
+                    <input type="submit" value="Save Changes" class="btn btn-primary col-12" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,51 @@
+﻿/**** navbar active link ****/
+#applications {
+    background-Color: #007aff;
+}
+#applications a text{
+	color: white;
+}
+@media screen and (max-width: 768px) {
+    #applications {
+        background-Color: rgba(0,0,0,0);
+    }
+	#applications a text{
+		color: #007aff;
+	}
+}
+/****************************/
+.media{
+	padding: 16px 12px 12px;
+}
+#not-found{
+	margin: 35vh 0;
+}
+#job-status p{
+	display: inline-block;
+	background-color: white;
+	padding: 0 4px;
+	margin: 0;
+	margin-bottom: 6px;
+}
+#job-status p span{
+	border-radius: 4px;
+	padding: 4px 8px;
+	text-transform: capitalize;
+}
+.Accepted{
+  border: 1px solid rgb(92, 184, 92);
+	color: rgb(92, 184, 92);
+}
+.Shortlisted{
+  border: 1px solid rgb(240, 173, 78);
+	color: rgb(240, 173, 78);
+}
+.Pending{
+  border: 1px solid rgb(2, 117, 216);
+	color: rgb(2, 117, 216);
+}
+.Rejected{
+  border: 1px solid rgb(217,83,79);
+	color: rgb(217,83,79);
+}
+

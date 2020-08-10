@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Jobby.Models.Application>
+@{ ViewBag.Title = "Applicants"; }
+@section style
+{
+    <link rel="stylesheet" href="~/Content/applicants.css" />
+}
+
+@Html.Partial("_EmployerNavbar")
+
+<div class="container content center-vertical px-lg-5">
+    <div class="row  px-3 px-lg-5">
+        <div id="applicants-container" class="col-md-8 offset-md-2">
+            @Html.Partial("_Applicants")
+        </div>
+    </div>
+</div>

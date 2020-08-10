@@ -1,0 +1,52 @@
+﻿@model Jobby.Models.UserSkill
+@{ ViewBag.Title = "New Skill"; }
+@section style
+{
+    <link rel="stylesheet" href="~/Content/user-skill.css" />
+}
+
+@Html.Partial("_EmployeeNavbar")
+
+<div class="container content center-vertical">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.ID)
+                @Html.HiddenFor(model => model.UserID)
+
+
+                <div class="col-lg-8 offset-lg-2 px-3 px-sm-5" id="user-skill-form">
+                    <div>
+                        <i class="fas fa-address-card fa-5x"></i>
+                        <h2 class="mb-3 heavy-text text-uppercase">Skill Information</h2>
+                    </div>
+                    <div class="input-group w-100">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Name</span>
+                        </div>
+                        @Html.EditorFor(model => model.SkillName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter name here.." } })
+                    </div>
+                    <div class="error-msg">
+                        @Html.ValidationMessageFor(model => model.SkillName)
+                    </div>
+                    <div id="level" class="d-flex">
+                        <span>Level</span>
+                        @Html.EditorFor(model => model.SkillLevel, new { htmlAttributes = new { type = "range", @class = "custom-range", min = 1, max = 5 } })
+                    </div>
+                    <div class="custom-control custom-switch text-left mt-n2 mb-2">
+                        @Html.EditorFor(model => model.IsLanguage, new { htmlAttributes = new { type = "checkbox", @class = "custom-control-input", id = "switch" } })
+                        <label class="custom-control-label text-secondary" for="switch">Language</label>
+                    </div>
+
+                    <input type="submit" value="Save Changes" class="btn btn-primary col-12 mb-2" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

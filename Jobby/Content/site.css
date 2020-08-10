@@ -1,0 +1,183 @@
+﻿* { 
+	box-sizing: border-box;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url("../webfonts/Roboto-Light.ttf");
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url("../webfonts/Roboto-Regular.ttf");
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url("../webfonts/Roboto-Medium.ttf");
+  font-weight: bold;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	background-color: white;
+	color: #202b46;
+	text-align: center;
+	font-size: 15px;
+	font-family: 'Roboto';
+	letter-spacing: 0.5px;
+}
+a:hover{
+	text-decoration: none;
+}
+.heavy-text{
+	font-weight: 600;
+	opacity: .9;
+}
+.bottom-line {
+	margin-top: -2px;
+	margin-bottom: 4px;
+	height: 4px;
+	width: 40px;
+	background-color:  #007aff;
+}
+.post-date{
+	font-size:13px;
+	padding-top: 2px;
+	opacity: .8;
+}
+/************* navbar **************/
+.navbar{ 
+	padding-top: 0;
+	padding-bottom: 0;
+	background-color: #1c2540;
+}
+.navbar li{
+	margin: 0 4px;
+	padding: 2px 0;
+}
+.navbar-nav a:not(.employer-btn):not(.icon-link) {
+	padding: 16px 14px;
+}
+.navbar-brand {
+  color: white;
+  font-size: 22px;
+}
+.navbar-nav a text{
+	font-size: 16px;
+	font-weight: 600;
+}
+.navbar-nav a text {
+  color: white;
+}
+.navbar-nav a:hover:not(.employer-btn) text,.navbar-brand span {
+    color: #007aff;
+}
+.employer-btn {
+  padding:0 3px 3px;
+  margin:15px 0 0 4px;
+  border: 1px solid white;
+  border-radius: 2px;
+}
+.employer-btn:hover{
+  background-color: #007aff;
+  border:1px solid #007aff; 
+}
+/****** Navbar on medium screen devices ******/
+@media screen and (max-width: 768px) {
+  .navbar {
+    background-color: #1c2540 !important ;
+	padding-top: 9px;
+	padding-bottom: 8px;
+    }
+  .navbar li{
+    margin: 2px 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    }
+  .navbar-nav a{
+    padding: 4px !important;
+  }
+  .employer-btn {
+    border: 1px solid rgba(0,0,0,0);
+    max-width: 100px;
+    margin: auto;
+  }
+  .employer-btn:hover{
+    background-color: rgba(0,0,0,0);
+    border: 1px solid rgba(0,0,0,0);
+  }
+  .employer-btn:hover text{
+    color: #007aff !important;
+  }
+}
+/************* footer Section **************/
+footer {
+  background-color: #1c2540;
+  color: white;
+  padding: 50px 12px;
+  text-align: left;
+}
+footer h5{
+  margin-top: 8px;
+}
+footer p {
+  margin: 0;
+}
+.links{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.social-link{
+  display: inline-block;
+  margin: 0 3px; 
+  color: white;
+  font-weight: 600;
+}
+.social-link, .links li a{
+  color: white;
+}
+.social-link:hover, .links a:hover{
+  color: #007aff;
+}
+/************* Forms style *************/
+.content{
+  padding-top: 60px;
+  min-height: 100vh;
+}
+.center-vertical {
+  display:  flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#registeration-form,
+#activation-form,
+#login-form,
+#forgot-form,
+#change-password-form,
+#change-email-form,
+#reset-form,
+#personal-info-form,
+#education-info-form,
+#user-skill-form,
+#account-info-form,
+#job-info-form,
+#applicants-container,
+#profile-container,
+#job-container{	
+  padding: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: rgb(230, 230, 230);
+  border: 1px solid rgb(225, 225, 225);
+  box-shadow: 0 0 20px rgb(225, 225, 225);
+  border-radius: 6px;
+}
+.error-msg{
+  height: 22px;
+  text-align: left;
+  color:  lightcoral;
+  font-size: 13px;
+}
+.fa-rocket{transform: rotate(-45deg);}

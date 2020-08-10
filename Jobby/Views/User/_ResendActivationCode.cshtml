@@ -1,0 +1,21 @@
+﻿<div>
+    <i class="fas fa-shield-alt fa-5x mb-1"></i>
+    <h2 class="heavy-text text-uppercase">Account Activation</h2>
+    <hr class="bottom-line" />
+    <p>
+        <strong>Welcome to Jobby, <span>@HttpContext.Current.User.Identity.Name.</span></strong><br />
+        We're so happy you've joined us. In order to activate your account, Please fill in the code sent to your email address.<br />
+        @if (ViewBag.State)
+        {
+            <span class="text-success">@ViewBag.Message</span>
+        }
+        else
+        {
+            <span class="text-danger">@ViewBag.Message</span>
+        }
+    </p>
+</div>
+<input type="text" class="form-control" name="code" placeholder="Enter code here.." required minlength="36" maxlength="36" />
+<div class="error-msg">
+</div>
+<input type="submit" value="Activate" class="btn btn-primary px-4" />

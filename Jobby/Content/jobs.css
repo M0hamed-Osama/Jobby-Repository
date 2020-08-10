@@ -1,0 +1,46 @@
+﻿.media{
+	padding: 12px;
+	margin-bottom: 16px;
+	text-align: left;
+  border: 1px solid rgb(225, 225, 225);
+	border-radius: 4px;
+	transition: all .5s;
+}
+.media:hover{
+  border: 1px solid rgb(180, 180, 180);
+}
+.media img {
+	width: 50px;
+	height: 50px;
+	margin-right: 12px;
+}
+.media h5{
+	padding: 0 4px 4px;
+	margin: 0;
+}
+.job-link, .job-link:hover{
+	color: #202b46;
+}
+.media-body hr{
+	margin: 4px 0 4px;
+}
+#details,#applicants, #edit, #delete{
+	padding: 4px;
+	width: 32px;
+}
+#apply{
+	width: 75px;
+}
+#description{
+	margin-top: -2px;
+	padding: 0 0 0 16px;
+	list-style-type: circle;
+}
+#not-found h3 , #not-found i{
+  color:#007aff;
+	opacity: .2;
+}
+#not-found a{
+	font-weight: 600;
+	opacity: .6;
+}

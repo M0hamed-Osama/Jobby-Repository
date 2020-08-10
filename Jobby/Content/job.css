@@ -1,0 +1,23 @@
+﻿#job-container{
+	text-align: left;
+}
+.post-date{
+	font-size:13px;
+	padding-top: 2px;
+	opacity: .4;
+}
+#job-container img{
+	width: 80px;
+	height: 80px;
+}
+#description{
+	margin-top: -2px;
+	padding: 0 0 0 16px;
+	list-style-type: circle;
+}
+.fa-bookmark,fa-bookmark:hover{
+	color:#007aff;
+	position: absolute;
+	top: 15px;
+	right: 15px;
+}

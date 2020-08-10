@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2777a12c2a274db58b3240abc50691c1" Name="Diagram1">
+        <EntityTypeShape EntityType="JobbyModel.Application" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobbyModel.Country" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobbyModel.Employee" Width="1.5" PointX="6" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobbyModel.Employer" Width="1.5" PointX="3" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobbyModel.JobField" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobbyModel.Job" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobbyModel.Role" Width="1.5" PointX="3.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobbyModel.SavedJob" Width="1.5" PointX="8.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobbyModel.UserEducation" Width="1.5" PointX="3" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobbyModel.UserRole" Width="1.5" PointX="6" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobbyModel.User" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobbyModel.UserSkill" Width="1.5" PointX="3" PointY="29.875" IsExpanded="true" />
+        <AssociationConnector Association="JobbyModel.FK__Applicati__JobID__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="JobbyModel.FK__Applicati__UserI__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="JobbyModel.FK__Employees__Count__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="JobbyModel.FK__Jobs__CountryID__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="JobbyModel.FK__Employees__UserI__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="JobbyModel.FK__Employers__UserI__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="JobbyModel.FK__Jobs__JobFieldID__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="JobbyModel.FK__Jobs__UserID__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="JobbyModel.FK__SavedJobs__JobID__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="JobbyModel.FK__UserRoles__RoleI__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="JobbyModel.FK__SavedJobs__UserI__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="JobbyModel.FK__UserEduca__UserI__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="JobbyModel.FK__UserRoles__UserI__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="JobbyModel.FK__UserSkill__UserI__276EDEB3" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

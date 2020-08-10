@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Jobby.Models.UserSkill>
+@{ ViewBag.Title = "Skills Information"; }
+@section style
+{
+    <link rel="stylesheet" href="~/Content/skills-info.css" />
+}
+
+@Html.Partial("_EmployeeNavbar")
+
+<div class="container content center-vertical">
+    <div class="row" id="user-skills-container">
+        @Html.Partial("_SkillsInformation")
+    </div>
+</div>

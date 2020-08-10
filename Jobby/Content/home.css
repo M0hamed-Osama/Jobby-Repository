@@ -1,0 +1,78 @@
+﻿/**** cover ****/
+#cover{
+    min-height: 100vh;
+    background-position: center center;
+    background-size: cover;
+}
+#overlay{
+    min-height: 100vh;
+		background-image: linear-gradient(to bottom, rgba(20, 30, 48,0.8), rgba(36, 59, 85,0.8));
+}
+#intro-txt{
+  color: white;
+	margin-bottom: 60px;
+}
+#intro-txt h1{
+  font-size:45px;
+  text-transform:uppercase;
+	font-weight: 600;
+  margin: 0;
+}
+#intro-txt p{
+	font-size:20px;
+}
+.input-group input{
+	max-width: 630px;
+}
+
+/**** companies Section ****/
+#companies-sec, #services-sec{
+	margin: 40px 0;
+}
+#companies, .job,.service{
+	background-color: rgb(230, 230, 230);
+  border: 1px solid rgb(225, 225, 225);
+	box-shadow: 0 0 12px rgb(225, 225, 225);
+	border-radius: 6px;
+}
+#companies{
+	padding: 12px 24px 24px;
+}
+.carousel-inner img, .job img{
+	width: 60px;
+	height: 60px;
+}
+.carousel-indicators{
+	position: absolute;
+	bottom: -40px;
+}
+.carousel-indicators li{
+	background-color: #202b46;
+}
+.carousel-indicators li.active{
+	background-color: #007aff;
+}
+#companies:hover{
+  border: 1px solid rgb(200, 200, 200);
+}
+/**** services Section ****/
+.service{
+	padding: 16px 12px;
+	transition: all .5s;
+	height: 100%;
+}
+.service h4, .service i{
+	color: rgba(0, 122, 255,1);
+	transition: all .8s;
+}
+.service:hover h4, .service:hover i{
+		color: rgba(32, 43, 70,1);
+}
+.service p, .service h4{
+	margin: 0;
+}
+.service .fa-city{
+	font-size: 58px;
+	margin-bottom: 4px;
+}
+

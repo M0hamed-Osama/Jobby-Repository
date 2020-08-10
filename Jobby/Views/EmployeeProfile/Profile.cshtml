@@ -1,0 +1,191 @@
+﻿@model Jobby.Models.User
+@{ ViewBag.Title = "Employee Profile"; }
+@section style
+{
+    <link rel="stylesheet" href="~/Content/user-profile.css" />
+}
+
+@Html.Partial("_EmployerNavbar")
+
+<div class="container content center-vertical px-lg-5">
+    <div class="row px-3 px-lg-5">
+        <div id="profile-container" class="col-md-8 offset-md-2">
+            <div class="w-100" id="profile-picture">
+                @if (Model.Img != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.Img);
+                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    <img src='@imgsrc' class="img-thumbnail" alt="profile picture" />
+                }
+                else
+                {
+                    <img src="~/Images/user.png" class="img-thumbnail" alt="profile picture" />
+                }
+                <h2 class="heavy-text">@Model.FName @Model.LName</h2>
+                <div id="accordion" class="text-left">
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <a class="card-link heavy-text" data-toggle="collapse" href="#personal">
+                                Personal Information <i class="fas fa-chevron-down float-right"></i>
+                            </a>
+                        </div>
+                        <div id="personal" class="collapse show" data-parent="#accordion">
+                            <div class="card-body">
+                                @if (Model.Employee.BirthDate != null)
+                                {
+                                    var birthdate = @Convert.ToDateTime(Model.Employee.BirthDate);
+                                    var age = DateTime.Today.Year - birthdate.Year;
+                                    if (birthdate.Date > DateTime.Today.AddYears(-age)) age--;
+                                    <p class="m-0"> <span class="heavy-text">Age : </span>@age Years.</p>
+                                }
+                                @if (Model.Employee.CountryID != null || Model.Employee.City != null)
+                                {
+                                    if (Model.Employee.CountryID != null && Model.Employee.City != null)
+                                    {
+                                        <p class="m-0"> <span class="heavy-text">Address : </span>@Model.Employee.Country.Name, @Model.Employee.City.</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="m-0"> <span class="heavy-text">Address : </span>@Model.Employee.Country.Name @Model.Employee.City.</p>
+                                    }
+                                }
+                                @if (Model.Employee.PhoneNumber != null)
+                                {
+                                    <p class="m-0"> <span class="heavy-text">Mobile Number : </span>@Model.Employee.PhoneNumber.</p>
+                                }
+                                <p class="m-0"> <span class="heavy-text">Email Address : </span>@Model.Email.</p>
+                                @if (Model.Employee.MartialStatus != null)
+                                {
+                                    <p class="m-0"> <span class="heavy-text">Martial Status : </span>@Model.Employee.MartialStatus.</p>
+                                }
+                                @if (Model.Employee.MilitaryStatus != null)
+                                {
+                                    <p class="m-0"> <span class="heavy-text">Military Status : </span>@Model.Employee.MilitaryStatus.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <a class="collapsed card-link heavy-text" data-toggle="collapse" href="#education">
+                                Education Information <i class="fas fa-chevron-down float-right"></i>
+                            </a>
+                        </div>
+                        <div id="education" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                @if (Model.UserEducation != null)
+                                {
+                                    <p class="m-0"> <span class="heavy-text">Studied : </span>@Model.UserEducation.Field at @Model.UserEducation.Entity from @Model.UserEducation.StartYear to @Model.UserEducation.EndYear.</p>
+                                    <p class="m-0"> <span class="heavy-text">Degree : </span>@Model.UserEducation.Degree.</p>
+                                    <p class="m-0"> <span class="heavy-text">Grade : </span>@Model.UserEducation.Grade.</p>
+                                }
+                                else
+                                {
+                                    <p class="m-0 heavy-text no-info"><i class="fas fa-exclamation-circle"></i> Sorry, @Model.FName didn't provide this information.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <a class="collapsed card-link heavy-text" data-toggle="collapse" href="#skills">
+                                Skills & Languages Information <i class="fas fa-chevron-down float-right"></i>
+                            </a>
+                        </div>
+                        <div id="skills" class="collapse" data-parent="#accordion">
+                            <div class="card-body skills-holder">
+                                @if (Model.UserSkills.Where(s => s.UserID == Model.ID).Count() > 0)
+                                {
+                                    foreach (var skill in Model.UserSkills.Where(s => s.UserID == Model.ID && s.IsLanguage == false).OrderByDescending(s => s.SkillLevel))
+                                    {
+                                        if (skill.SkillLevel == 5)
+                                        {
+                                            <span class="skill heavy-text bg-success">@skill.SkillName</span>
+                                        }
+                                        else if (skill.SkillLevel == 4)
+                                        {
+                                            <span class="skill heavy-text bg-primary">@skill.SkillName</span>
+                                        }
+                                        else if (skill.SkillLevel == 3)
+                                        {
+                                            <span class="skill heavy-text bg-warning">@skill.SkillName</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="skill heavy-text bg-danger">@skill.SkillName</span>
+                                        }
+                                    }
+                                    <br />
+                                    foreach (var skill in Model.UserSkills.Where(s => s.UserID == Model.ID && s.IsLanguage == true).OrderByDescending(s => s.SkillLevel))
+                                    {
+                                        if (skill.SkillLevel == 5)
+                                        {
+                                            <span class="skill heavy-text bg-success">@skill.SkillName</span>
+                                        }
+                                        else if (skill.SkillLevel == 4)
+                                        {
+                                            <span class="skill heavy-text bg-primary">@skill.SkillName</span>
+                                        }
+                                        else if (skill.SkillLevel == 3)
+                                        {
+                                            <span class="skill heavy-text bg-warning">@skill.SkillName</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="skill heavy-text bg-danger">@skill.SkillName</span>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <p class="m-0 heavy-text no-info"><i class="fas fa-exclamation-circle"></i> Sorry, @Model.FName didn't provide this information.</p>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <a class="collapsed card-link heavy-text" data-toggle="collapse" href="#work">
+                                Work Information <i class="fas fa-chevron-down float-right"></i>
+                            </a>
+                        </div>
+                        <div id="work" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                @{ bool info_exist = false;}
+                                @if (Model.Employee.Salary != null)
+                                {
+                                    info_exist = true;
+                                    <p class="m-0"> <span class="heavy-text">Minimum Salary : </span>@Model.Employee.Salary EGP.</p>
+                                }
+                                @if (Model.Employee.JobStatus != null)
+                                {
+                                    info_exist = true;
+                                    <p class="m-0"> <span class="heavy-text">Job Status : </span>@Model.Employee.JobStatus.</p>
+                                }
+                                @if (Model.Employee.CareerLevel != null)
+                                {
+                                    info_exist = true;
+                                    <p class="m-0"> <span class="heavy-text">Career Level : </span>@Model.Employee.CareerLevel.</p>
+                                }
+                                @if (Model.Employee.CV != null)
+                                {
+                                    info_exist = true;
+                                    <p class="m-0">
+                                        <span class="heavy-text">Resume : </span>
+                                        <a class="text-decoration-none text-info" href=@Url.Action("DownloadCV","EmployeeProfile",new { id = Model.ID })>Download<i class="fas fa-arrow-circle-down"></i></a>
+                                    </p>
+                                }
+                                @if (!info_exist)
+                                {
+                                    <p class="m-0 heavy-text no-info"><i class="fas fa-exclamation-circle"></i> Sorry, @Model.FName didn't provide this information.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

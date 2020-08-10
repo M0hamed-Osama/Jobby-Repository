@@ -1,0 +1,24 @@
+﻿#level {
+	width: 100%;
+	text-align: left;
+	margin-top: 0;
+	margin-bottom: 22px;
+	border: 1px solid #ced4da;
+	border-radius: 4px;
+	display: flex;
+	background-color: white;
+}
+#level span {
+		background-color: #e9ecef;
+		padding: 5px 15px;
+		color: #495057;
+		font-size: 1rem;
+		font-weight: 400;
+		border-right: 1px solid #ced4da;
+}
+
+#level input {
+		margin-top: 6px;
+		padding: 0 12px;
+}
+.custom-control-label{font-size: 17px;}

@@ -1,0 +1,68 @@
+﻿@model Jobby.Models.Extended.WorkInfoViewModel
+@{ ViewBag.Title = "Personal Information"; }
+
+@Html.Partial("_EmployeeNavbar")
+
+<div class="container content center-vertical">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            @using (Html.BeginForm("WorkInformation", "EmployeeProfile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="col-lg-8 offset-lg-2 px-3 px-sm-5" id="personal-info-form">
+                    <div>
+                        <i class="fas fa-briefcase fa-5x"></i>
+                        <h2 class="mb-3 text-uppercase heavy-text">Work Information</h2>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" title="Expected Salary"><i class="fas fa-coins"></i></span>
+                        </div>
+                        @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control", placeholder = "Expected Salary (EGP/Month)", min = "500", step = "100" } })
+                    </div>
+                    <div class="error-msg">
+                        @Html.ValidationMessageFor(model => model.Salary)
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" title="Job Status"><i class="fas fa-briefcase"></i></span>
+                        </div>
+                        @Html.DropDownList("JobStatus",
+                        new SelectList(new List<string>() { "Unemployed", "Actively searching", "Not looking for a job" }, Model.JobStatus), "Job Status", new { @class = "custom-select" })
+                    </div>
+                    <div class="error-msg">
+                        @Html.ValidationMessageFor(model => model.JobStatus)
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" title="Career Level"><i class="fas fa-layer-group"></i></span>
+                        </div>
+                        @Html.DropDownList("CareerLevel",
+                        new SelectList(new List<string>() { "Volunteer", "Internship", "Student", "Entry Level", "Experienced", "Manager", "Senior Management" }, Model.CareerLevel), "Career Level", new { @class = "custom-select" })
+                    </div>
+                    <div class="error-msg">
+                        @Html.ValidationMessageFor(model => model.CareerLevel)
+                    </div>
+
+                    <div class="custom-file">
+                        @Html.TextBoxFor(model => model.CV, new { @class = "custom-file-input", type = "file", accept = ".pdf" })
+                        <label class="custom-file-label text-left text-secondary" for="customFile">Upload New CV</label>
+                    </div>
+                    <div class="error-msg text-right">
+                        @if (@ViewBag.CvExist)
+                        {
+                            <a class="text-decoration-none" href=@Url.Action("DownloadCV")>Download Current CV <i class="fas fa-arrow-circle-down"></i></a>
+                        }
+                    </div>
+                    <input type="submit" value="Save Changes" class="btn btn-primary col-12" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/work-info.js"></script>
+}

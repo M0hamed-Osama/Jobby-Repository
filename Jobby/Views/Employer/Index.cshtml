@@ -1,0 +1,74 @@
+﻿@{ ViewBag.Title = "Home"; }
+@section style
+{
+    <link rel="stylesheet" href="~/Content/home-employer.css" />
+    <link rel="stylesheet" href="~/Content/home.css" />
+}
+
+@Html.Partial("_EmployerNavbar")
+<!-- cover Section -->
+<div id="cover">
+    <div id="overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1 content center-vertical">
+                    <div id="intro-txt">
+                        <h1>Hire fast Grow faster</h1>
+                        <p>Start hiring now with our online Recruitment Platform</p>
+                        <div class="d-flex flex-row justify-content-center">
+                            <a class="btn btn-primary px-3 text-uppercase" href=@Url.Action("Register")>Get Started Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- companies section-->
+<section id="companies-sec" class="w-100">
+    @Html.Action("TopCompanies")
+</section>
+
+<!-- hire section-->
+<section id="hire-sec" class="w-100">
+    <div class="container">
+        <div class="row d-none d-lg-flex">
+            <div class="col-lg-7 center-vertical py-4 text-left" id="hire-text">
+                <h2 class="heavy-text my-2">Access Jobby's Largest Dataset of Professional Talents</h2>
+                <p class="my-0">
+                    Whatever the job function, industry, or career level you are hiring for, you’ll find it at Jobby.
+                    Leverage our rich and continuously-growing database of professionals all the way from fresh grads
+                    to senior managers, directors, and C-levels.
+                </p>
+                <div><a class="btn btn-primary px-3 mt-3 text-uppercase" href=@Url.Action("Create","Job")>Start Hiring Now</a></div>
+            </div>
+            <div class="col-lg-5 center-vertical p-3">
+                <img src="~/Images/database.svg" />
+            </div>
+        </div>
+        <div class="row d-lg-none">
+            <div class="w-100 text-center">
+                <img src="~/Images/database.svg" />
+            </div>
+            <div class="w-100 pt-2 text-center" id="hire-text">
+                <h2 class="heavy-text my-2">Access Jobby's Largest Dataset of Professional Talents</h2>
+                <p class="my-0">
+                    Whatever the job function, industry, or career level you are hiring for, you’ll find it at Jobby.
+                    Leverage our rich and continuously-growing database of professionals all the way from fresh grads
+                    to senior managers, directors, and C-levels.
+                </p>
+                <div><a class="btn btn-primary px-3 mt-2 text-uppercase" href=@Url.Action("Create","Job")>Start Hiring Now</a></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- services section-->
+<section id="services-sec" class="w-100">
+    @Html.Action("Services", "Employee")
+</section>
+@section scripts{
+    <script src="~/Scripts/home.js"></script>
+}

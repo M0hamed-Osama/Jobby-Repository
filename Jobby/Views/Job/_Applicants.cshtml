@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Jobby.Models.Application>
+
+@if (Model.Count() > 0)
+{
+    <div class="w-100">
+        <i class="fas fa-users fa-5x"></i>
+        <h2 class="heavy-text text-uppercase m-0">Job Applicants</h2>
+        <p class=" m-0 mb-2">@Context.User.Identity.Name, You had recieved <span class="text-primary">@Model.Count() </span>job application(s) for <strong>@Model.Select(a => a.Job.Title).FirstOrDefault()</strong> position in @Model.Select(a => a.Job.User.Employer.CompanyName).FirstOrDefault() . Please visit applicants profile for more information about them. </p>
+        <hr class="bottom-line mb-3" />
+    </div>
+    foreach (var application in Model)
+    {
+        <div class="applicant">
+            @if (application.User.Img != null)
+            {
+                var base64 = Convert.ToBase64String(application.User.Img);
+                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                <a href=@Url.Action("Profile", "EmployeeProfile", new { id = application.UserID }) title="View Profile">
+                    <img src='@imgsrc' class="img-thumbnail" alt="Profile Picture" height="40" width="40" />
+                </a>
+            }
+            else
+            {
+                <a href=@Url.Action("Profile", "EmployeeProfile", new { id = application.UserID }) title="View Profile">
+                    <img src="~/Images/user.png" class="img-thumbnail" alt="Profile Picture" height="40" width="40" />
+                </a>
+            }
+            <a href=@Url.Action("Profile", "EmployeeProfile", new { id = application.UserID }) title="View Profile" class="text-dark">
+                <h5>@application.User.FName @application.User.LName.</h5>
+            </a>
+            @using (Html.BeginForm("EditJobStatus", "Job"))
+            {
+                @Html.HiddenFor(a => application.JobID)
+                @Html.HiddenFor(a => application.UserID)
+                @Html.DropDownListFor(a => application.ApplicationStatus, new SelectList(new List<string>() { "Pending", "Shortlisted", "Accepted","Rejected" }, application.ApplicationStatus), null, htmlAttributes: new { @class = "custom-select custom-select-sm", title = "Application Status", onchange = "this.form.submit();" })
+            }
+        </div>
+    }
+}
+else
+{
+    <div class="w-100 py-4">
+        <i class="fas fa-users fa-5x"></i>
+        <h2 class="heavy-text text-uppercase m-0">Job Applicants</h2>
+        <p class=" m-0 mb-2">@Context.User.Identity.Name, We are sorry you haven't recieved any job application yet. Please come back later for more information about applicants.</p>
+    </div>
+}
+

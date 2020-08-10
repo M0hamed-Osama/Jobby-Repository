@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Jobby.Models.Employer>
+
+<div class="container">
+    <div class="w-100 p-2">
+        <h2 class="heavy-text">Join Jobby's Top Companies</h2>
+        <hr class="bottom-line" />
+    </div>
+    <div class="row px-3">
+        <div id="companies" class="w-100">
+            <!-- slider -->
+            <div id="mycarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#mycarousel" data-slide-to="1"></li>
+                    <li data-target="#mycarousel" data-slide-to="2"></li>
+                </ul>
+                <!-- slideshow-->
+                <div class="carousel-inner">
+                    @{ bool flag = true;}
+                    @foreach (var employer in Model)
+                    {
+                        if (flag)
+                        {
+                            flag = false;
+                            <div class="carousel-item active">
+                                @if (employer.User.Img != null)
+                                {
+                                    var base64 = Convert.ToBase64String(employer.User.Img);
+                                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                    <img src='@imgsrc' class="img-thumbnail rounded-circle" alt="company logo" title="@employer.CompanyName"/>
+                                }
+                                else
+                                {
+                                    <img src="~/Images/company.png" class="img-thumbnail rounded-circle" alt="company logo" title="@employer.CompanyName"/>
+                                }
+                                <h4 class="heavy-text m-0">@employer.CompanyName</h4>
+                                <p class="m-0">@employer.CompanyName posted @employer.User.Jobs.Where(j=>j.UserID==employer.UserID).Count().ToString() jobs related to <span class="heavy-text">@employer.Indusrty</span> field.
+                                <br />For more information about @employer.CompanyName, Please visit their website <span class="heavy-text"><a href="@employer.Website">@employer.Website</a></span></p>
+                            </div>
+                        }
+                        else 
+                        {
+                            <div class="carousel-item">
+                                @if (employer.User.Img != null)
+                                {
+                                    var base64 = Convert.ToBase64String(employer.User.Img);
+                                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                    <img src='@imgsrc' class="img-thumbnail rounded-circle" alt="company logo" title="@employer.CompanyName"/>
+                                }
+                                else
+                                {
+                                    <img src="~/Images/company.png" class="img-thumbnail rounded-circle" alt="company logo" title="@employer.CompanyName"/>
+                                }
+                                <h4 class="heavy-text m-0">@employer.CompanyName</h4>
+                                <p class="m-0">@employer.CompanyName posted @employer.User.Jobs.Where(j => j.UserID == employer.UserID).Count().ToString() jobs related to <span class="heavy-text">@employer.Indusrty</span> field.
+                                <br />For more information about @employer.CompanyName, Please visit their website <span class="heavy-text"><a href="@employer.Website">@employer.Website</a></span></p>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Jobby.Models.SavedJob>
+@{ ViewBag.Title = "Saved Jobs"; }
+@section style
+{
+    <link rel="stylesheet" href="~/Content/jobs.css" />
+    <link rel="stylesheet" href="~/Content/saved-jobs.css" />
+}
+
+@Html.Partial("_EmployeeNavbar")
+
+<div class="container content">
+    <div class="row">
+        <div id="saved-jobs-container" class="col-lg-10 offset-lg-1">
+            @Html.Partial("_SavedJobs")
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/job.js"></script>
+}
+
